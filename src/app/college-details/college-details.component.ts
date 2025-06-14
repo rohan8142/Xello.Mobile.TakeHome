@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, map } from 'rxjs';
 import * as CollegeListSelectors from '../college-list/college-list.selectors';
+import * as CollegeListActions from '../college-list/college-list.actions';
 
 @Component({
   selector: 'app-college-details',
@@ -26,5 +27,10 @@ export class CollegeDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private store: Store) {}
 
-  ngOnInit() {}
-}
+  ngOnInit(): void {
+    this.store.dispatch(CollegeListActions.loadColleges());
+  }
+
+
+  }
+

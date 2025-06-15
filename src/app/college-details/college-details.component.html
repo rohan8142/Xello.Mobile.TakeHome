@@ -1,14 +1,27 @@
-<div *ngIf="college$ | async as college; else noCollege" class="college-details-card">
+<div
+  *ngIf="college$ | async as college; else noCollege"
+  class="college-details-card"
+>
   <h2>{{ college.name }}</h2>
   <ul>
     <li><strong>Id:</strong> {{ college.id }}</li>
     <li><strong>City:</strong> {{ college.city }}</li>
     <li><strong>State:</strong> {{ college.state }}</li>
     <li><strong>Number of Students:</strong> {{ college.numStudents }}</li>
-    <li><strong>Tuition & Fees:</strong> {{ college.tuitionAndFees | currency:'USD' }}</li>
+    <li>
+      <strong>Tuition & Fees:</strong>
+      {{ college.tuitionAndFees | currency : "USD" }}
+    </li>
     <li><strong>Number of Majors:</strong> {{ college.numMajors }}</li>
-    <li><strong>Has Sports:</strong> {{ college.hasSports ? 'Yes' : 'No' }}</li>
+    <li><strong>Has Sports:</strong> {{ college.hasSports ? "Yes" : "No" }}</li>
   </ul>
+  <button
+    class="back-button"
+    (click)="goBack()"
+    aria-label="Back to college list"
+  >
+    Back to List
+  </button>
 </div>
 <ng-template #noCollege>
   <p>No college selected.</p>

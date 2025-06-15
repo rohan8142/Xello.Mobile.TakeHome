@@ -4,6 +4,9 @@ import { CollegeDetailsComponent } from './college-details/college-details.compo
 
 export const routes: Routes = [
   { path: '', component: CollegeListComponent },
-  { path: 'college/:id',
-    component: CollegeDetailsComponent },
+  {
+  path: 'college',
+  loadChildren: () =>
+    import('./college-details/college-details.module').then(m => m.CollegeDetailsModule)
+},
 ];

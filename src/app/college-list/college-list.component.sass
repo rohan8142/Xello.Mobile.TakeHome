@@ -1,13 +1,14 @@
 :host
   display: block
   width: 100%
-  min-width: 0           
+  min-width: 0
+  overflow-x: hidden           
 
 .virtual-scroll
   height: 600px          
   width: 100%
   display: block
-  overflow-y: auto       
+  overflow-x: hidden       
 
 .virtual-scroll > table,
 .college-table           
@@ -40,11 +41,30 @@ tr:hover
   transition: background 0.3s, box-shadow 0.3s, transform 0.2s
   cursor: pointer
 
+.loading-spinner
+  padding: 1rem
+  text-align: center
+  font-size: 1rem
+  font-style: italic
+  color: #333
+
+.error-banner
+  background: #fff3f3
+  color: #b00020
+  padding: 1rem
+  margin: 1rem 0
+  border: 1px solid #b00020
+  font-weight: bold
+  text-align: center
+
 @media (max-width: 500px)
   table, thead, tbody, th, td, tr
     display: block
     width: 100%
     box-sizing: border-box
+  
+  
+   
 
   thead
     display: none
@@ -86,3 +106,5 @@ tr:hover
     box-shadow: 0 4px 16px rgba(79,70,229,0.15)
     transform: scale(1.01)
     background: linear-gradient(90deg, #e0e7ff 0%, #f3e8ff 100%)
+
+  

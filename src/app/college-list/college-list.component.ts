@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+
 
 @Component({
   selector: 'app-college-list',
@@ -21,7 +21,7 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollegeListComponent {
-  colleges$: Observable<College[]> = this.store.select(CollegeListSelectors.selectColleges);
+  colleges$: Observable<College[]> = this.store.select(CollegeListSelectors.selectFilteredColleges);
   loading$: Observable<boolean> = this.store.select(CollegeListSelectors.selectCollegesLoading);
   error$: Observable<any> = this.store.select(CollegeListSelectors.selectCollegesError);
 
@@ -56,4 +56,11 @@ export class CollegeListComponent {
   onRowClick(college: College) {
     this.router.navigate(['/college', college.id]);
   }
+
+
+  onFilterChange(query: string) {
+  this.store.dispatch(CollegeListActions.filterColleges({ query }));
+  console.log('Filter changed:', query);
+}
+
 }

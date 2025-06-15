@@ -1,45 +1,60 @@
-<input
-  type="text"
-  placeholder="Filter by school name..."
-  [(ngModel)]="filter"
-  class="college-filter"
-/>
+<section aria-label="College List">
+  <input
+    id="collegeFilter"
+    [(ngModel)]="filter"
+    (ngModelChange)="onFilterChange($event)"
+    class="college-filter"
+    type="text"
+    placeholder="Filter by school name..."
+    aria-label="Filter by college name"
+  />
 
-<table class="college-table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Num Students</th>
-      <th>Tuition & Fees</th>
-      <th>Num Majors</th>
-      <th>Has Sports</th>
-    </tr>
-  </thead>
-</table>
-
-<cdk-virtual-scroll-viewport itemSize="20" class="virtual-scroll">
-  <table class="college-table">
-    <tbody>
-      <tr
-        *cdkVirtualFor="let college of colleges$ | async; trackBy: trackById"
-        (click)="onRowClick(college)"
-      >
-        <td data-label="Id">{{ college.id }}</td>
-        <td data-label="Name">{{ college.name }}</td>
-        <td data-label="City">{{ college.city }}</td>
-        <td data-label="State">{{ college.state }}</td>
-        <td data-label="Num Students">{{ college.numStudents }}</td>
-        <td data-label="Tuition & Fees">
-          {{ college.tuitionAndFees | currency : "USD" }}
-        </td>
-        <td data-label="Num Majors">{{ college.numMajors }}</td>
-        <td data-label="Has Sports">{{ college.hasSports ? "Yes" : "No" }}</td>
+  <table class="college-table" role="table" aria-label="College list">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        <th scope="col">Students</th>
+        <th scope="col">Tuition</th>
+        <th scope="col">Majors</th>
+        <th scope="col">Sports</th>
       </tr>
-    </tbody>
+    </thead>
   </table>
-</cdk-virtual-scroll-viewport>
-<div *ngIf="loading$ | async" class="loading">Loading colleges...</div>
-<div *ngIf="error$ | async as error" class="error">Error: {{ error }}</div>
+
+  <cdk-virtual-scroll-viewport role="list" itemSize="20" class="virtual-scroll">
+    <table class="college-table">
+      <tbody>
+        <tr
+          *cdkVirtualFor="let college of colleges$ | async; trackBy: trackById"
+          (click)="onRowClick(college)"
+          (keydown.enter)="onRowClick(college)"
+          tabindex="0"
+          role="row"
+        >
+          <td>{{ college.id }}</td>
+          <td>{{ college.name }}</td>
+          <td>{{ college.city }}</td>
+          <td>{{ college.state }}</td>
+          <td>{{ college.numStudents }}</td>
+          <td>{{ college.tuitionAndFees | currency : "USD" }}</td>
+          <td>{{ college.numMajors }}</td>
+          <td>{{ college.hasSports ? "Yes" : "No" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</section>
+<div
+  *ngIf="loading$ | async"
+  class="loading-spinner"
+  role="status"
+  aria-live="polite"
+>
+  Loading colleges…
+</div>
+<div *ngIf="error$ | async as error" class="error-banner" role="alert">
+  Failed to load college data. Please try again later.
+</div>

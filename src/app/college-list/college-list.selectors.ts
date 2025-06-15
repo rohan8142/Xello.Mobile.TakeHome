@@ -17,3 +17,8 @@ export const selectCollegesError = createSelector(
   selectCollegeListState,
   (state) => state.error
 );
+
+export const selectFilteredColleges = createSelector(
+  selectCollegeListState,
+  state => state.filteredColleges
+);

@@ -7,7 +7,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { collegeListReducer } from './college-list/college-list.reducer';
 import { CollegeListEffects } from './college-list/college-list.effects';
 import { provideHttpClient } from '@angular/common/http';
-import { CollegeDetailsComponent } from './college-details/college-details.component';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +16,6 @@ export const appConfig: ApplicationConfig = {
     provideEffects([CollegeListEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: false }),
     provideHttpClient(),
-    CollegeDetailsComponent
+    
   ]
 };
